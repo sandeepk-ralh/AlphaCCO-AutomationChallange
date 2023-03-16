@@ -15,23 +15,14 @@ import java.time.Duration;
 public class BaseTest extends ConfigReader {
 
     protected static WebDriver driver;
-
     protected static String baseURL;
-
     protected static String emailAlphaCCO;
-
     protected static String password;
-
     protected static String wrongEmail;
-
     protected static String wrongPassword;
-
     protected static String newPassword;
-
     protected static String outlookPassword;
-
     protected static String outlookUrl;
-
     protected static String targetBrowser;
 
     @BeforeSuite
@@ -44,37 +35,31 @@ public class BaseTest extends ConfigReader {
         newPassword = ConfigReader.getNewPassword();
         outlookPassword = ConfigReader.getOutlookPassword();
         outlookUrl = ConfigReader.getOutlookUrl();
-    }
-
-    @BeforeMethod
-    public void driverSetup() {
+        
         targetBrowser = System.getProperty("targetBrowser");
         if(targetBrowser == null) {
             targetBrowser = System.getenv("targetBrowser");
         }
+    }
+
+    @BeforeMethod
+    public void driverSetup() {
         if (targetBrowser.equalsIgnoreCase("chrome") ) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--remote-allow-origins=*");
             driver = new ChromeDriver(chromeOptions);
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.get(baseURL);
         } if (targetBrowser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.get(baseURL);
         }
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get(baseURL);
     }
 
     @AfterMethod
     public void quitDriver() {
-        try {
-            driver.quit();
-        } catch (org.openqa.selenium.WebDriverException e) {
-            driver.quit();
-        }
+        driver.quit();
     }
 }
