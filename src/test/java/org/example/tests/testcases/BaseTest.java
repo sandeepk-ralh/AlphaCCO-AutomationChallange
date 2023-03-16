@@ -40,6 +40,9 @@ public class BaseTest extends ConfigReader {
         if(targetBrowser == null) {
             targetBrowser = System.getenv("targetBrowser");
         }
+        if(targetBrowser == null) {
+            targetBrowser = "chrome";
+        }
     }
 
     @BeforeMethod
