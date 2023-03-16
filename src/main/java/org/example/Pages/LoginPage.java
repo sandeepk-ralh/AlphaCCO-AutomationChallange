@@ -60,7 +60,7 @@ public class LoginPage extends BasePage {
         clickOnElement(requestResetButton);
     }
 
-    public Boolean changePasswordWithTempPassword(String email, String tempPassword, String newPassword, String confirmPassword) {
+    public Boolean changePasswordWithTempPassword(String email, String tempPassword, String newPassword) {
         pauseForAWhile(3);
         enterText(emailInput, email);
         enterText(passwordInput, tempPassword);
@@ -68,7 +68,7 @@ public class LoginPage extends BasePage {
         waitUntilElementToBeClickable(previousPasswordInput);
         enterText(previousPasswordInput, tempPassword);
         enterText(newPasswordInput, newPassword);
-        enterText(newPasswordConfirmation, confirmPassword);
+        enterText(newPasswordConfirmation, newPassword);
         clickOnElement(updatePasswordButton);
         return true;
     }
