@@ -4,7 +4,10 @@ Steps to follow to run this test automation:
 
 Clone this repo.
 Go to cloned directory.
-Execute the below command in the project director: mvn -DtargetBrowser=chrome test
+Execute the below command in the project director: 
+`mvn -DtargetBrowser=chrome test`
+or
+`mvn test`
 
 Assumptions:
 You should have JDK17 setuped on your machine. If you have other JDK then please update the POM file.
