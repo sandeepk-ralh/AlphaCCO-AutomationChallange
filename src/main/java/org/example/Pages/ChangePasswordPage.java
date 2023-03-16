@@ -31,14 +31,14 @@ public class ChangePasswordPage extends BasePage {
         super(driver);
     }
 
-    public boolean changePasswordFromUserProfile(String oldPassword, String newPassword, String confirmPassword) {
+    public boolean changePasswordFromUserProfile(String oldPassword, String newPassword) {
         pauseForAWhile(3);
         waitUntilElementToBeClickable(userProfileButton);
         clickOnElement(userProfileButton);
         clickOnElement(changePasswordButton);
         enterText(previousPasswordInput, oldPassword);
         enterText(newPasswordInput, newPassword);
-        enterText(newPasswordConfirmation, confirmPassword);
+        enterText(newPasswordConfirmation, newPassword);
         clickOnElement(updatePasswordButton);
         return true;
     }
