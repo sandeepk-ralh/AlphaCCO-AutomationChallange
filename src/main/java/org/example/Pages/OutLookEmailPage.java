@@ -34,8 +34,6 @@ public class OutLookEmailPage extends BasePage {
     @FindBy(css = "div:nth-child(2) > table > tbody > tr > td > a")
     protected WebElement loginBtn;
 
-
-
     public OutLookEmailPage(WebDriver driver) {
         super(driver);
     }
@@ -51,12 +49,11 @@ public class OutLookEmailPage extends BasePage {
         enterText(passwordInputArea, outlookPwd);
         clickOnElement(nextOrSigninButton);
         clickOnElement(signedInConfirmationButton);
-        pauseForAWhile(3);
+        pauseForAWhile(4);
         refreshPage();
         waitUntilElementToBeClickable(firstInboxMessage);
         clickOnElement(firstInboxMessage);
         waitForPageToLoad();
-        scrollDown(1);
         String elementText = getPassword.getText();
         String[] lines = elementText.split("\n");
         String single = lines[1].trim();

@@ -27,8 +27,7 @@ public class RandomPasswordGenerator {
         return sb.toString();
     }
 
-    public static String getRandomPassword() {
-        String newPassword = RandomPasswordGenerator.generateRandomPassword();
+    public static String updatePasswordInConfigFile(String newPassword) {
         Properties prop = new Properties();
         FileInputStream input = null;
         try {

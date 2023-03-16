@@ -45,9 +45,10 @@ public class E2ETest extends BaseTest {
     public void changePasswordTest() {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         loginPage.doLogin(emailAlphaCCO, password);
-        String newPassword = RandomPasswordGenerator.getRandomPassword();
+        String newPassword = RandomPasswordGenerator.generateRandomPassword();
         ChangePasswordPage changePasswordPage = PageFactory.initElements(driver, ChangePasswordPage.class);
-        changePasswordPage.changePasswordFromUserProfile(password, newPassword, newPassword);
+        Assert.assertTrue(changePasswordPage.changePasswordFromUserProfile(password, newPassword, newPassword));
+        RandomPasswordGenerator.updatePasswordInConfigFile(newPassword);
         Assert.assertEquals(changePasswordPage.getLoginText(), "PLEASE LOG IN");
     }
 
@@ -57,8 +58,10 @@ public class E2ETest extends BaseTest {
         forgotPassword.requestForgotPassword(emailAlphaCCO);
         OutLookEmailPage outLookEmailPage = PageFactory.initElements(driver, OutLookEmailPage.class);
         String tempPassword = outLookEmailPage.getTempPasswordOutlookMail(outlookUrl, emailAlphaCCO, outlookPassword);
-        String newPassword = RandomPasswordGenerator.getRandomPassword();
-        forgotPassword.changePasswordWithTempPassword(emailAlphaCCO, tempPassword, newPassword, newPassword);
+        String newPassword = RandomPasswordGenerator.generateRandomPassword();
+        Assert.assertTrue(forgotPassword.changePasswordWithTempPassword(emailAlphaCCO, tempPassword,
+                newPassword, newPassword));
+        RandomPasswordGenerator.updatePasswordInConfigFile(newPassword);
         ChangePasswordPage changePasswordPage = PageFactory.initElements(driver, ChangePasswordPage.class);
         Assert.assertEquals(changePasswordPage.getLoginText(), "PLEASE LOG IN");
     }

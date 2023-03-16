@@ -44,7 +44,6 @@ public class BasePage {
     public void waitForPageToLoad() {
         FluentWait<WebDriver> driverWait = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofMillis(250));
-
         try {
             driverWait.until(isTrue -> ((JavascriptExecutor) driver).executeScript("return document.readyState")
                     .equals("complete"));

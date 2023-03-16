@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ChangePasswordPage extends BasePage {
 
-    @FindBy(id = "UserLogin")
+    @FindBy(css = "div.nav-item:nth-child(4)")
     protected WebElement userProfileButton;
 
     @FindBy(id = "lnkChgPassword")
@@ -31,8 +31,8 @@ public class ChangePasswordPage extends BasePage {
         super(driver);
     }
 
-    public void changePasswordFromUserProfile(String oldPassword, String newPassword, String confirmPassword) {
-        pauseForAWhile(4);
+    public boolean changePasswordFromUserProfile(String oldPassword, String newPassword, String confirmPassword) {
+        pauseForAWhile(3);
         waitUntilElementToBeClickable(userProfileButton);
         clickOnElement(userProfileButton);
         clickOnElement(changePasswordButton);
@@ -40,6 +40,7 @@ public class ChangePasswordPage extends BasePage {
         enterText(newPasswordInput, newPassword);
         enterText(newPasswordConfirmation, confirmPassword);
         clickOnElement(updatePasswordButton);
+        return true;
     }
 
     public String getLoginText() {

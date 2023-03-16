@@ -21,6 +21,7 @@ public class MyProfilePage extends BasePage {
 
     public void goToUserProfile() {
         pauseForAWhile(3);
+        waitUntilElementToBeClickable(userProfileButton);
         clickOnElement(userProfileButton);
         clickOnElement(editProfileButton);
     }

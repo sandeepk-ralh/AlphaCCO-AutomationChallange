@@ -31,9 +31,6 @@ public class LoginPage extends BasePage {
     @FindBy(id = "MainContent_btnModalForgotPasswordSendRequest")
     protected WebElement requestResetButton;
 
-    @FindBy(css = "div[id='ModalForgotPasswordConfirm'] > div > div > div > h3")
-    protected WebElement forgotPasswordConfirmationMessage;
-
     @FindBy(id = "input-7")
     protected WebElement previousPasswordInput;
 
@@ -45,7 +42,6 @@ public class LoginPage extends BasePage {
 
     @FindBy(css = "#app > div > div > form > div > button")
     protected WebElement updatePasswordButton;
-
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -64,19 +60,21 @@ public class LoginPage extends BasePage {
         clickOnElement(requestResetButton);
     }
 
-    public void changePasswordWithTempPassword(String email, String tempPassword, String newPassword, String confirmPassword) {
-        pauseForAWhile(4);
+    public Boolean changePasswordWithTempPassword(String email, String tempPassword, String newPassword, String confirmPassword) {
+        pauseForAWhile(3);
         enterText(emailInput, email);
         enterText(passwordInput, tempPassword);
         clickOnElement(loginButton);
+        waitUntilElementToBeClickable(previousPasswordInput);
         enterText(previousPasswordInput, tempPassword);
         enterText(newPasswordInput, newPassword);
         enterText(newPasswordConfirmation, confirmPassword);
         clickOnElement(updatePasswordButton);
+        return true;
     }
 
     public boolean isDashboardVisible() {
-        waitForVisibilityOfElementCss("");
+        pauseForAWhile(2);
         return dashboardMenu.isDisplayed();
     }
 
