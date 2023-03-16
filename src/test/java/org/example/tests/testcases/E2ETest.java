@@ -47,7 +47,7 @@ public class E2ETest extends BaseTest {
         loginPage.doLogin(emailAlphaCCO, password);
         String newPassword = RandomPasswordGenerator.generateRandomPassword();
         ChangePasswordPage changePasswordPage = PageFactory.initElements(driver, ChangePasswordPage.class);
-        Assert.assertTrue(changePasswordPage.changePasswordFromUserProfile(password, newPassword, newPassword));
+        Assert.assertTrue(changePasswordPage.changePasswordFromUserProfile(password, newPassword));
         RandomPasswordGenerator.updatePasswordInConfigFile(newPassword);
         Assert.assertEquals(changePasswordPage.getLoginText(), "PLEASE LOG IN");
     }
@@ -59,8 +59,7 @@ public class E2ETest extends BaseTest {
         OutLookEmailPage outLookEmailPage = PageFactory.initElements(driver, OutLookEmailPage.class);
         String tempPassword = outLookEmailPage.getTempPasswordOutlookMail(outlookUrl, emailAlphaCCO, outlookPassword);
         String newPassword = RandomPasswordGenerator.generateRandomPassword();
-        Assert.assertTrue(forgotPassword.changePasswordWithTempPassword(emailAlphaCCO, tempPassword,
-                newPassword, newPassword));
+        Assert.assertTrue(forgotPassword.changePasswordWithTempPassword(emailAlphaCCO, tempPassword, newPassword));
         RandomPasswordGenerator.updatePasswordInConfigFile(newPassword);
         ChangePasswordPage changePasswordPage = PageFactory.initElements(driver, ChangePasswordPage.class);
         Assert.assertEquals(changePasswordPage.getLoginText(), "PLEASE LOG IN");
